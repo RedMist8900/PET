@@ -30,7 +30,7 @@ namespace PET.DataLayer
         }
         #endregion
 
-        #region Machine
+        #region Agent
         public void AddAgent(Agents agent)
         {
             try
@@ -88,5 +88,62 @@ namespace PET.DataLayer
         }
         #endregion
 
+        #region Informants
+        public void AddInformant(Informants informant)
+        {
+            try
+            {
+                Persons informantPerson = informant.Persons;
+                db.Persons.Add(informantPerson);
+
+                db.Informants.Add(informant);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("DataBase", ex);
+            }
+        }
+
+        public void EditInformant(Informants informant)
+        {
+            try
+            {
+                Persons informantPerson = informant.Persons;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("DataBase", ex);
+            }
+        }
+
+        public void DeleteInformant(Informants informant)
+        {
+            try
+            {
+                if (informant != null)
+                {
+                    // new person 
+                    // p => p.Id == agent.PersonsID
+                    // Same as a foreach
+                    // it is trying to match the person (p) with the specific p.Id
+                    Persons person = db.Persons.Single(p => p.Id == informant.PersonsID);
+
+                    // Removes the person from the Person tables
+                    db.Persons.Remove(person);
+
+                    // removes the corresponding agent in the Agents table
+                    db.Informants.Remove(informant);
+
+                    // Save the changes to the database
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("DataLayer", ex);
+            }
+        }
+        #endregion
     }
 }

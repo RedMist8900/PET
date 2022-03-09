@@ -52,7 +52,7 @@
                         <Button x:Name="btEditAgent" Content="Edit Agent" Width="120" Height="25" Margin="5" Click="btEditAgent_Click"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right" Width="500">
-                        <DataGrid x:Name="dgAgents" ItemsSource="{Binding AgentsList.Persons}" AutoGenerateColumns="True" Margin="5" Height="320" SelectionChanged="dgAgents_SelectionChanged"  ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <DataGrid x:Name="dgAgents" ItemsSource="{Binding PersonsList}" AutoGenerateColumns="True" Margin="5" Height="320" SelectionChanged="dgAgents_SelectionChanged"  ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"/>
                                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
@@ -113,7 +113,7 @@
                         <Button x:Name="btEditInformant" Content="Edit Informant" Width="120" Height="25" Margin="5"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right" Width="500">
-                        <DataGrid x:Name="dgInformants" ItemsSource="{Binding InformantsList}" AutoGenerateColumns="False" Margin="5" Height="320">
+                        <!--<DataGrid x:Name="dgInformants" ItemsSource="{Binding InformantsList}" AutoGenerateColumns="False" Margin="5" Height="320">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="First Name" Binding="{Binding Persons.InformantsID.FirstName}"/>
                                 <DataGridTextColumn Header="Last Name" Binding="{Binding Persons.InformantsID.LastName}"/>
@@ -121,7 +121,7 @@
                                 <DataGridTextColumn Header="Eye Color" Binding="{Binding Persons.InformantsID.EyeColor}"/>
                                 <DataGridTextColumn Header="Hair Color" Binding="{Binding Persons.InformantsID.HairColor}"/>
                             </DataGrid.Columns>
-                        </DataGrid>
+                        </DataGrid>-->
                         <Button x:Name="btDeleteInformant" Content="Delete Informant" HorizontalAlignment="Center" Margin="5" Height="35" Width="120" FontWeight="Black" Background="PaleVioletRed"/>
                     </StackPanel>
                 </Grid>
@@ -140,7 +140,7 @@
                 <Grid Background="LightGray">
                     <StackPanel HorizontalAlignment="Left" Width="260">
                         <Label Content="Register Agent" HorizontalAlignment="Center" FontWeight="Bold"/>
-                        <StackPanel Orientation="Horizontal" Height="30">
+                        <!--<StackPanel Orientation="Horizontal" Height="30">
                             <Label Content="Agent" Margin="5 0 5 0" Width="70"/>
                             <ComboBox x:Name="cbAgents" ItemsSource="{Binding AgentsList}" Width="150" Margin="6" HorizontalAlignment="Left"/>
                         </StackPanel>
@@ -151,7 +151,7 @@
                         <StackPanel Orientation="Horizontal" Height="30">
                             <Label Content="Observant" Margin="5 0 5 0" Width="70"/>
                             <ComboBox x:Name="cbObservant" ItemsSource="{Binding ObservantsList}" Width="150" Margin="6" HorizontalAlignment="Left"/>
-                        </StackPanel>
+                        </StackPanel>-->
                         <StackPanel Orientation="Horizontal" Height="40">
                             <Label Content="Date" Margin="5 0 5 0" Width="70"/>
                             <DatePicker x:Name="dpDate" Width="150" Margin="6" HorizontalAlignment="Left"/>
@@ -168,13 +168,13 @@
                         <Button x:Name="btEditReport" Content="Edit Report" Width="120" Height="25" Margin="5"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right" Width="500">
-                        <DataGrid x:Name="dgReports" ItemsSource="{Binding ReportsList}" AutoGenerateColumns="False" Margin="5" Height="320">
+                        <!--<DataGrid x:Name="dgReports" ItemsSource="{Binding ReportsList}" AutoGenerateColumns="False" Margin="5" Height="320">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
                                 <DataGridTextColumn Header="Place" Binding="{Binding Place}"/>
                                 <DataGridTextColumn Header="Comments" Binding="{Binding Comments}"/>
                             </DataGrid.Columns>
-                        </DataGrid>
+                        </DataGrid>-->
                         <Button x:Name="btDeleteReport" Content="Delete Agent" HorizontalAlignment="Center" Margin="5" Height="35" Width="120" FontWeight="Black" Background="PaleVioletRed"/>
                     </StackPanel>
                 </Grid>

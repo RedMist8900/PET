@@ -43,10 +43,6 @@ namespace PET.FunctionsLayer
         }
         #endregion
 
-        #region People
-        public ObservableCollection<Persons> People = new ObservableCollection<Persons>();
-        #endregion
-
         #region Agent
         public void AddAgent(Agents agent)
         {
@@ -54,6 +50,8 @@ namespace PET.FunctionsLayer
             {
                 data.AddAgent(agent);
                 RaisePropertyChanged("AgentsList");
+                RaisePropertyChanged("PersonsList");
+                
             }
             catch (Exception ex)
             {
@@ -90,7 +88,48 @@ namespace PET.FunctionsLayer
         #endregion
 
         #region Informant
+        public void AddInformant(Informants informant)
+        {
+            try
+            {
+                data.AddInformant(informant);
+                RaisePropertyChanged("InformantsList");
+                RaisePropertyChanged("PersonsList");
 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Function", ex);
+            }
+        }
+
+        public void EditInformant(Informants informant)
+        {
+            try
+            {
+                data.EditInformant(informant);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void DeleteInformant(Informants informant)
+        {
+            try
+            {
+                if (informant != null)
+                {
+                    data.DeleteInformant(informant);
+                    RaisePropertyChanged("AgentsList");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("FunctionLayer", ex);
+            }
+        }
         #endregion
 
         #region Observant

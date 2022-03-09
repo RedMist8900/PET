@@ -26,7 +26,7 @@ namespace PET
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = func;
+            this.DataContext = func;
         }
 
         private void btAddAgent_Click(object sender, RoutedEventArgs e)
@@ -34,14 +34,14 @@ namespace PET
             try
             {
                 //Creating a notionality first to tie with the person
-                Nationalities agentNationality = new Nationalities
-                {
-                    // Converting the TextBoxes string input to Integers
-                    CountryCode = Convert.ToInt32(tbAgentCountryCode.Text),
-                    CprNr = Convert.ToInt32(tbAgentCprNr.Text),
-                    ZipCode = Convert.ToInt32(tbAgentZipCode.Text),
-                    StreetAdress = tbAgentStreetAdress.Text
-                };
+                //Nationalities agentNationality = new Nationalities
+                //{
+                //    // Converting the TextBoxes string input to Integers
+                //    CountryCode = Convert.ToInt32(tbAgentCountryCode.Text),
+                //    CprNr = Convert.ToInt32(tbAgentCprNr.Text),
+                //    ZipCode = Convert.ToInt32(tbAgentZipCode.Text),
+                //    StreetAdress = tbAgentStreetAdress.Text
+                //};
 
                 // Creating the person with the nationality tied
                 Persons agentPerson = new Persons
@@ -51,7 +51,14 @@ namespace PET
                     Height = Convert.ToDouble(tbAgentHeight.Text),
                     EyeColor = tbAgentEyeColor.Text,
                     HairColor = tbAgentHairColor.Text,
-                    Nationalities = agentNationality
+                    Nationalities = new Nationalities
+                    {
+                        // Converting the TextBoxes string input to Integers
+                        CountryCode = Convert.ToInt32(tbAgentCountryCode.Text),
+                        CprNr = Convert.ToInt32(tbAgentCprNr.Text),
+                        ZipCode = Convert.ToInt32(tbAgentZipCode.Text),
+                        StreetAdress = tbAgentStreetAdress.Text
+                    }
                 };
 
                 Agents agent = new Agents
@@ -89,19 +96,19 @@ namespace PET
         {
             if(e.AddedItems.Count > 0)
             {
-                Agents agent = (e.AddedItems[0] as Agents);
-                Persons agentPerson = agent.Persons;
-                Nationalities personNationality = agentPerson.Nationalities;
-                tbAgentFirstName.Text = agentPerson.FirstName;
-                tbAgentLastName.Text = agentPerson.LastName;
-                tbAgentHeight.Text = Convert.ToString(agentPerson.Height);
-                tbAgentEyeColor.Text = agentPerson.EyeColor;
-                tbAgentHairColor.Text = agentPerson.HairColor;
+                Persons agentPersons = (e.AddedItems[0] as Persons);
+                //Persons agentPerson = agent.Persons;
+                //Nationalities personNationality = agentPerson.Nationalities;
+                tbAgentFirstName.Text = agentPersons.FirstName;
+                tbAgentLastName.Text = agentPersons.LastName;
+                tbAgentHeight.Text = Convert.ToString(agentPersons.Height);
+                tbAgentEyeColor.Text = agentPersons.EyeColor;
+                tbAgentHairColor.Text = agentPersons.HairColor;
 
-                tbAgentCountryCode.Text = Convert.ToString(personNationality.CountryCode);
-                tbAgentCprNr.Text = Convert.ToString(personNationality.CprNr);
-                tbAgentZipCode.Text = Convert.ToString(personNationality.ZipCode);
-                tbAgentStreetAdress.Text = personNationality.StreetAdress;
+                //tbAgentCountryCode.Text = Convert.ToString(personNationality.CountryCode);
+                //tbAgentCprNr.Text = Convert.ToString(personNationality.CprNr);
+                //tbAgentZipCode.Text = Convert.ToString(personNationality.ZipCode);
+                //tbAgentStreetAdress.Text = personNationality.StreetAdress;
             }
             else
             {
@@ -111,10 +118,10 @@ namespace PET
                 tbAgentEyeColor.Text = "";
                 tbAgentHairColor.Text = "";
 
-                tbAgentCountryCode.Text = "";
-                tbAgentCprNr.Text = "";
-                tbAgentZipCode.Text = "";
-                tbAgentStreetAdress.Text = "";
+                //tbAgentCountryCode.Text = "";
+                //tbAgentCprNr.Text = "";
+                //tbAgentZipCode.Text = "";
+                //tbAgentStreetAdress.Text = "";
             }
         }
     }
