@@ -1,0 +1,194 @@
+﻿<Window x:Class="PET.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PET"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Agent" >
+                <Grid Background="LightGray">
+                    <StackPanel HorizontalAlignment="Left" Width="260">
+                        <Label Content="Register Agent" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="First Name:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbAgentFirstName" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Last Name:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbAgentLastName" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Height:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbAgentHeight" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Eye Color:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbAgentEyeColor" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Hair Color:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbAgentHairColor" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Country Code:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbAgentCountryCode" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Cpr Nr:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbAgentCprNr" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Zip Code:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbAgentZipCode" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Street Adress:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbAgentStreetAdress" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <Button x:Name="btAddAgent" Content="Add Agent" Width="120" Height="25" Margin="5" Click="btAddAgent_Click"/>
+                        <Button x:Name="btEditAgent" Content="Edit Agent" Width="120" Height="25" Margin="5" Click="btEditAgent_Click"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Width="500">
+                        <DataGrid x:Name="dgAgents" ItemsSource="{Binding AgentsList.Persons}" AutoGenerateColumns="True" Margin="5" Height="320" SelectionChanged="dgAgents_SelectionChanged"  ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"/>
+                                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"/>
+                                <DataGridTextColumn Header="Height" Binding="{Binding Height}"/>
+                                <DataGridTextColumn Header="Eye Color" Binding="{Binding EyeColor}"/>
+                                <DataGridTextColumn Header="Hair Color" Binding="{Binding HairColor}"/>
+                                <DataGridTextColumn Header="Country Code" Binding="{Binding CountryCode}"/>
+                                <DataGridTextColumn Header="CprNr" Binding="{Binding CprNr}"/>
+                                <DataGridTextColumn Header="ZipCode" Binding="{Binding ZipCode}"/>
+                                <DataGridTextColumn Header="StreetAdress" Binding="{Binding StreetAdress}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button x:Name="btDeleteAgent" Content="Delete Agent" HorizontalAlignment="Center" Margin="5" Height="35" Width="120" FontWeight="Black" Background="PaleVioletRed" Click="btDeleteAgent_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Informant">
+                <Grid Background="LightGray">
+                    <StackPanel HorizontalAlignment="Left" Width="260">
+                        <Label Content="Register Informant" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="First Name:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbInformantFirstName" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Last Name:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbInformantLastName" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Height:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbInformantHeight" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Eye Color:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbInformantEyeColor" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Hair Color:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbInformantHairColor" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Country Code:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbInformantCountryCode" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Cpr Nr:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbInformantCprNr" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Zip Code:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbInformantZipCode" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Street Adress:" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbInformantStreetAdress" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <Button x:Name="btAddInformant" Content="Add Informant" Width="120" Height="25" Margin="5"/>
+                        <Button x:Name="btEditInformant" Content="Edit Informant" Width="120" Height="25" Margin="5"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Width="500">
+                        <DataGrid x:Name="dgInformants" ItemsSource="{Binding InformantsList}" AutoGenerateColumns="False" Margin="5" Height="320">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="First Name" Binding="{Binding Persons.InformantsID.FirstName}"/>
+                                <DataGridTextColumn Header="Last Name" Binding="{Binding Persons.InformantsID.LastName}"/>
+                                <DataGridTextColumn Header="Height" Binding="{Binding Persons.InformantsID.Height}"/>
+                                <DataGridTextColumn Header="Eye Color" Binding="{Binding Persons.InformantsID.EyeColor}"/>
+                                <DataGridTextColumn Header="Hair Color" Binding="{Binding Persons.InformantsID.HairColor}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button x:Name="btDeleteInformant" Content="Delete Informant" HorizontalAlignment="Center" Margin="5" Height="35" Width="120" FontWeight="Black" Background="PaleVioletRed"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Observant">
+                <Grid Background="LightGray">
+                    <StackPanel HorizontalAlignment="Left" Width="260">
+
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Width="500">
+
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Report" >
+                <Grid Background="LightGray">
+                    <StackPanel HorizontalAlignment="Left" Width="260">
+                        <Label Content="Register Agent" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Agent" Margin="5 0 5 0" Width="70"/>
+                            <ComboBox x:Name="cbAgents" ItemsSource="{Binding AgentsList}" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Informant" Margin="5 0 5 0" Width="70"/>
+                            <ComboBox x:Name="cbInformant" ItemsSource="{Binding InformantsList}" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Observant" Margin="5 0 5 0" Width="70"/>
+                            <ComboBox x:Name="cbObservant" ItemsSource="{Binding ObservantsList}" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="40">
+                            <Label Content="Date" Margin="5 0 5 0" Width="70"/>
+                            <DatePicker x:Name="dpDate" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Label Content="Place" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbReportPlace" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="100">
+                            <Label Content="Comments" Margin="5 0 5 0" Width="70"/>
+                            <TextBox x:Name="tbComments" Width="150" Margin="6" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <Button x:Name="btAddReport" Content="Add Report" Width="120" Height="25" Margin="5"/>
+                        <Button x:Name="btEditReport" Content="Edit Report" Width="120" Height="25" Margin="5"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Width="500">
+                        <DataGrid x:Name="dgReports" ItemsSource="{Binding ReportsList}" AutoGenerateColumns="False" Margin="5" Height="320">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
+                                <DataGridTextColumn Header="Place" Binding="{Binding Place}"/>
+                                <DataGridTextColumn Header="Comments" Binding="{Binding Comments}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button x:Name="btDeleteReport" Content="Delete Agent" HorizontalAlignment="Center" Margin="5" Height="35" Width="120" FontWeight="Black" Background="PaleVioletRed"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Payments">
+                <Grid Background="LightGray">
+                    
+                </Grid>
+            </TabItem>
+            <TabItem Header="Logs">
+                <Grid Background="LightGray">
+                    
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

@@ -1,0 +1,750 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PETEksameModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonsID" Type="int" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="150" />
+          <Property Name="ObservantsID" Type="int" />
+        </EntityType>
+        <EntityType Name="Informants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentsInfoID" Type="int" />
+          <Property Name="PersonsID" Type="int" />
+        </EntityType>
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportsID" Type="int" />
+        </EntityType>
+        <EntityType Name="Nationalities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryCode" Type="int" />
+          <Property Name="CprNr" Type="int" />
+          <Property Name="PersonsID" Type="int" />
+          <Property Name="ZipCode" Type="int" />
+          <Property Name="StreetAdress" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Observants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupID" Type="int" />
+          <Property Name="PersonsID" Type="int" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PreferredPayment" Type="nvarchar" MaxLength="50" />
+          <Property Name="InformantsID" Type="int" />
+          <Property Name="ValutaID" Type="int" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Height" Type="float" />
+          <Property Name="EyeColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="HairColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="NationalitiesID" Type="int" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="nchar" MaxLength="10" />
+          <Property Name="Place" Type="nvarchar" MaxLength="150" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="500" />
+          <Property Name="InformantsID" Type="int" />
+          <Property Name="AgentsID" Type="int" />
+          <Property Name="ObservantsID" Type="int" />
+        </EntityType>
+        <EntityType Name="Valutas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Agents_ToPersons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1" />
+          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Agents">
+              <PropertyRef Name="PersonsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Informants_ToPayments">
+          <End Role="Payments" Type="Self.Payments" Multiplicity="0..1" />
+          <End Role="Informants" Type="Self.Informants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Informants">
+              <PropertyRef Name="PaymentsInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Informants_ToPersons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1" />
+          <End Role="Informants" Type="Self.Informants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Informants">
+              <PropertyRef Name="PersonsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logs_ToReports">
+          <End Role="Reports" Type="Self.Reports" Multiplicity="0..1" />
+          <End Role="Logs" Type="Self.Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="ReportsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Observants_ToGroups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="Observants" Type="Self.Observants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Observants">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Observants_ToPersons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1" />
+          <End Role="Observants" Type="Self.Observants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Observants">
+              <PropertyRef Name="PersonsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Informants">
+          <End Role="Informants" Type="Self.Informants" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Informants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="InformantsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Valutas">
+          <End Role="Valutas" Type="Self.Valutas" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Valutas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ValutaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persons_ToNationalities">
+          <End Role="Nationalities" Type="Self.Nationalities" Multiplicity="0..1" />
+          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nationalities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="NationalitiesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_ToAgents">
+          <End Role="Agents" Type="Self.Agents" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="AgentsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_ToInformants">
+          <End Role="Informants" Type="Self.Informants" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Informants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="InformantsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_ToObservants">
+          <End Role="Observants" Type="Self.Observants" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Observants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="ObservantsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PETEksameModelStoreContainer">
+          <EntitySet Name="Agents" EntityType="Self.Agents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Informants" EntityType="Self.Informants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logs" EntityType="Self.Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nationalities" EntityType="Self.Nationalities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Observants" EntityType="Self.Observants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Valutas" EntityType="Self.Valutas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Agents_ToPersons" Association="Self.FK_Agents_ToPersons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Agents" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Informants_ToPayments" Association="Self.FK_Informants_ToPayments">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="Informants" EntitySet="Informants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Informants_ToPersons" Association="Self.FK_Informants_ToPersons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Informants" EntitySet="Informants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logs_ToReports" Association="Self.FK_Logs_ToReports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Observants_ToGroups" Association="Self.FK_Observants_ToGroups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Observants" EntitySet="Observants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Observants_ToPersons" Association="Self.FK_Observants_ToPersons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Observants" EntitySet="Observants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Informants" Association="Self.FK_Payments_Informants">
+            <End Role="Informants" EntitySet="Informants" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Valutas" Association="Self.FK_Payments_Valutas">
+            <End Role="Valutas" EntitySet="Valutas" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persons_ToNationalities" Association="Self.FK_Persons_ToNationalities">
+            <End Role="Nationalities" EntitySet="Nationalities" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_ToAgents" Association="Self.FK_Reports_ToAgents">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_ToInformants" Association="Self.FK_Reports_ToInformants">
+            <End Role="Informants" EntitySet="Informants" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_ToObservants" Association="Self.FK_Reports_ToObservants">
+            <End Role="Observants" EntitySet="Observants" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PETEksameModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonsID" Type="Int32" />
+          <NavigationProperty Name="Persons" Relationship="Self.FK_Agents_ToPersons" FromRole="Agents" ToRole="Persons" />
+          <NavigationProperty Name="Reports" Relationship="PETEksameModel.FK_Reports_ToAgents" FromRole="Agents" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ObservantsID" Type="Int32" />
+          <NavigationProperty Name="Observants" Relationship="Self.FK_Observants_ToGroups" FromRole="Groups" ToRole="Observants" />
+        </EntityType>
+        <EntityType Name="Informants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentsInfoID" Type="Int32" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Informants_ToPayments" FromRole="Informants" ToRole="Payments" />
+          <NavigationProperty Name="Payments1" Relationship="Self.FK_Payments_Informants" FromRole="Informants" ToRole="Payments" />
+          <Property Name="PersonsID" Type="Int32" />
+          <NavigationProperty Name="Persons" Relationship="PETEksameModel.FK_Informants_ToPersons" FromRole="Informants" ToRole="Persons" />
+          <NavigationProperty Name="Reports" Relationship="PETEksameModel.FK_Reports_ToInformants" FromRole="Informants" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="Logs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportsID" Type="Int32" />
+          <NavigationProperty Name="Reports" Relationship="PETEksameModel.FK_Logs_ToReports" FromRole="Logs" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="Nationalities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryCode" Type="Int32" />
+          <Property Name="CprNr" Type="Int32" />
+          <Property Name="PersonsID" Type="Int32" />
+          <Property Name="ZipCode" Type="Int32" />
+          <NavigationProperty Name="Persons" Relationship="Self.FK_Persons_ToNationalities" FromRole="Nationalities" ToRole="Persons" />
+          <Property Name="StreetAdress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Observants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupID" Type="Int32" />
+          <Property Name="PersonsID" Type="Int32" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_Observants_ToGroups" FromRole="Observants" ToRole="Groups" />
+          <NavigationProperty Name="Persons" Relationship="Self.FK_Observants_ToPersons" FromRole="Observants" ToRole="Persons" />
+          <NavigationProperty Name="Reports" Relationship="PETEksameModel.FK_Reports_ToObservants" FromRole="Observants" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PreferredPayment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InformantsID" Type="Int32" />
+          <Property Name="ValutaID" Type="Int32" />
+          <NavigationProperty Name="Informants" Relationship="Self.FK_Informants_ToPayments" FromRole="Payments" ToRole="Informants" />
+          <NavigationProperty Name="Informants1" Relationship="Self.FK_Payments_Informants" FromRole="Payments" ToRole="Informants" />
+          <NavigationProperty Name="Valutas" Relationship="Self.FK_Payments_Valutas" FromRole="Payments" ToRole="Valutas" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="EyeColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HairColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NationalitiesID" Type="Int32" />
+          <NavigationProperty Name="Agents" Relationship="Self.FK_Agents_ToPersons" FromRole="Persons" ToRole="Agents" />
+          <NavigationProperty Name="Nationalities" Relationship="Self.FK_Persons_ToNationalities" FromRole="Persons" ToRole="Nationalities" />
+          <NavigationProperty Name="Observants" Relationship="Self.FK_Observants_ToPersons" FromRole="Persons" ToRole="Observants" />
+          <NavigationProperty Name="Informants" Relationship="PETEksameModel.FK_Informants_ToPersons" FromRole="Persons" ToRole="Informants" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Place" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="InformantsID" Type="Int32" />
+          <Property Name="AgentsID" Type="Int32" />
+          <Property Name="ObservantsID" Type="Int32" />
+          <NavigationProperty Name="Agents" Relationship="PETEksameModel.FK_Reports_ToAgents" FromRole="Reports" ToRole="Agents" />
+          <NavigationProperty Name="Informants" Relationship="PETEksameModel.FK_Reports_ToInformants" FromRole="Reports" ToRole="Informants" />
+          <NavigationProperty Name="Logs" Relationship="PETEksameModel.FK_Logs_ToReports" FromRole="Reports" ToRole="Logs" />
+          <NavigationProperty Name="Observants" Relationship="PETEksameModel.FK_Reports_ToObservants" FromRole="Reports" ToRole="Observants" />
+        </EntityType>
+        <EntityType Name="Valutas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payments_Valutas" FromRole="Valutas" ToRole="Payments" />
+        </EntityType>
+        <Association Name="FK_Agents_ToPersons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1" />
+          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Agents">
+              <PropertyRef Name="PersonsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Observants_ToGroups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="Observants" Type="Self.Observants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Observants">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Informants_ToPayments">
+          <End Role="Payments" Type="Self.Payments" Multiplicity="0..1" />
+          <End Role="Informants" Type="Self.Informants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Informants">
+              <PropertyRef Name="PaymentsInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Informants">
+          <End Role="Informants" Type="Self.Informants" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Informants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="InformantsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persons_ToNationalities">
+          <End Role="Nationalities" Type="Self.Nationalities" Multiplicity="0..1" />
+          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nationalities">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="NationalitiesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Observants_ToPersons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1" />
+          <End Role="Observants" Type="Self.Observants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Observants">
+              <PropertyRef Name="PersonsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Valutas">
+          <End Role="Valutas" Type="Self.Valutas" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Valutas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ValutaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PETEksameEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agents" EntityType="Self.Agents" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" />
+          <EntitySet Name="Informants" EntityType="Self.Informants" />
+          <EntitySet Name="Logs" EntityType="Self.Logs" />
+          <EntitySet Name="Nationalities" EntityType="Self.Nationalities" />
+          <EntitySet Name="Observants" EntityType="Self.Observants" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" />
+          <EntitySet Name="Valutas" EntityType="Self.Valutas" />
+          <AssociationSet Name="FK_Agents_ToPersons" Association="Self.FK_Agents_ToPersons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Agents" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Observants_ToGroups" Association="Self.FK_Observants_ToGroups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Observants" EntitySet="Observants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Informants_ToPayments" Association="Self.FK_Informants_ToPayments">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="Informants" EntitySet="Informants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Informants" Association="Self.FK_Payments_Informants">
+            <End Role="Informants" EntitySet="Informants" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persons_ToNationalities" Association="Self.FK_Persons_ToNationalities">
+            <End Role="Nationalities" EntitySet="Nationalities" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Observants_ToPersons" Association="Self.FK_Observants_ToPersons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Observants" EntitySet="Observants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Valutas" Association="Self.FK_Payments_Valutas">
+            <End Role="Valutas" EntitySet="Valutas" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_ToAgents" Association="PETEksameModel.FK_Reports_ToAgents">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Informants_ToPersons" Association="PETEksameModel.FK_Informants_ToPersons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Informants" EntitySet="Informants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_ToInformants" Association="PETEksameModel.FK_Reports_ToInformants">
+            <End Role="Informants" EntitySet="Informants" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Logs_ToReports" Association="PETEksameModel.FK_Logs_ToReports">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Logs" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_ToObservants" Association="PETEksameModel.FK_Reports_ToObservants">
+            <End Role="Observants" EntitySet="Observants" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Reports_ToAgents">
+          <End Type="PETEksameModel.Agents" Role="Agents" Multiplicity="0..1" />
+          <End Type="PETEksameModel.Reports" Role="Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="AgentsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Informants_ToPersons">
+          <End Type="PETEksameModel.Persons" Role="Persons" Multiplicity="0..1" />
+          <End Type="PETEksameModel.Informants" Role="Informants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Informants">
+              <PropertyRef Name="PersonsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_ToInformants">
+          <End Type="PETEksameModel.Informants" Role="Informants" Multiplicity="0..1" />
+          <End Type="PETEksameModel.Reports" Role="Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Informants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="InformantsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Logs_ToReports">
+          <End Type="PETEksameModel.Reports" Role="Reports" Multiplicity="0..1" />
+          <End Type="PETEksameModel.Logs" Role="Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Logs">
+              <PropertyRef Name="ReportsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reports_ToObservants">
+          <End Type="PETEksameModel.Observants" Role="Observants" Multiplicity="0..1" />
+          <End Type="PETEksameModel.Reports" Role="Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Observants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="ObservantsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PETEksameModelStoreContainer" CdmEntityContainer="PETEksameEntities">
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="PETEksameModel.Agents">
+              <MappingFragment StoreEntitySet="Agents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PersonsID" ColumnName="PersonsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="PETEksameModel.Groups">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="ObservantsID" ColumnName="ObservantsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Informants">
+            <EntityTypeMapping TypeName="PETEksameModel.Informants">
+              <MappingFragment StoreEntitySet="Informants">
+                <ScalarProperty Name="PersonsID" ColumnName="PersonsID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PaymentsInfoID" ColumnName="PaymentsInfoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="PETEksameModel.Logs">
+              <MappingFragment StoreEntitySet="Logs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReportsID" ColumnName="ReportsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nationalities">
+            <EntityTypeMapping TypeName="PETEksameModel.Nationalities">
+              <MappingFragment StoreEntitySet="Nationalities">
+                <ScalarProperty Name="StreetAdress" ColumnName="StreetAdress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="CprNr" ColumnName="CprNr" />
+                <ScalarProperty Name="PersonsID" ColumnName="PersonsID" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Observants">
+            <EntityTypeMapping TypeName="PETEksameModel.Observants">
+              <MappingFragment StoreEntitySet="Observants">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="PersonsID" ColumnName="PersonsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="PETEksameModel.Payments">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PreferredPayment" ColumnName="PreferredPayment" />
+                <ScalarProperty Name="InformantsID" ColumnName="InformantsID" />
+                <ScalarProperty Name="ValutaID" ColumnName="ValutaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="PETEksameModel.Persons">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="EyeColor" ColumnName="EyeColor" />
+                <ScalarProperty Name="HairColor" ColumnName="HairColor" />
+                <ScalarProperty Name="NationalitiesID" ColumnName="NationalitiesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="PETEksameModel.Reports">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="InformantsID" ColumnName="InformantsID" />
+                <ScalarProperty Name="AgentsID" ColumnName="AgentsID" />
+                <ScalarProperty Name="ObservantsID" ColumnName="ObservantsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Valutas">
+            <EntityTypeMapping TypeName="PETEksameModel.Valutas">
+              <MappingFragment StoreEntitySet="Valutas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
